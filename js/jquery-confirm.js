@@ -1077,14 +1077,14 @@
             /*
              unbind the window resize & keyup event.
              */
-            $(window).unbind('resize.' + this._id);
-            $(window).unbind('keyup.' + this._id);
-            $(window).unbind('jcKeyDown.' + this._id);
+            $(window).off('resize.' + this._id);
+            $(window).off('keyup.' + this._id);
+            $(window).off('jcKeyDown.' + this._id);
 
             if(this.draggable){
-                $(window).unbind('mousemove.' + this._id);
-                $(window).unbind('mouseup.' + this._id);
-                this.$titleContainer.unbind('mousedown');
+                $(window).off('mousemove.' + this._id);
+                $(window).off('mouseup.' + this._id);
+                this.$titleContainer.off('mousedown');
             }
 
             that.$el.removeClass(that.loadedClass);

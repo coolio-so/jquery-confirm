@@ -1,5 +1,6 @@
 /*!
  * jquery-confirm v3.3.4 (http://craftpip.github.io/jquery-confirm/)
+ * jquery-confirm v3.3.4-custom (https://github.com/coolio-so/jquery-confirm)
  * Author: Boniface Pereira
  * Website: www.craftpip.com
  * Contact: hey@craftpip.com
@@ -357,7 +358,7 @@
             theme = theme.split(',');
             $.each(theme, function(k, a){
                 if(a.indexOf(that._themePrefix) === -1)
-                    theme[k] = that._themePrefix + $.trim(a);
+                    theme[k] = that._themePrefix + a.trim();
             });
             this.themeParsed = theme.join(' ').toLowerCase();
         },
@@ -368,7 +369,7 @@
             var that = this;
             $.each(animation, function(k, a){
                 if(a.indexOf(that._bgDismissPrefix) === -1)
-                    animation[k] = that._bgDismissPrefix + $.trim(a);
+                    animation[k] = that._bgDismissPrefix + a.trim();
             });
             this.backgroundDismissAnimationParsed = animation.join(' ').toLowerCase();
         },
@@ -385,7 +386,7 @@
             var that = this;
             $.each(animations, function(k, a){
                 if(a.indexOf(that._animationPrefix) === -1)
-                    animations[k] = that._animationPrefix + $.trim(a);
+                    animations[k] = that._animationPrefix + a.trim();
             });
             var a_string = animations.join(' ').toLowerCase();
             if(which === 'o')
@@ -557,10 +558,13 @@
                         // that.$contentPane.css({
                         //     'height': contentHeight
                         // }).scrollTop(0);
+                        that.$contentPane.css({
+                            'height': contentHeight
+                        });
                         prevContentHeight = contentHeight;
                     }
                     var wh = $(window).height();
-                    var total = that.offsetTop + that.offsetBottom + that.$jconfirmBox.height() - that.$contentPane.height() + that.$content.height();
+                    var total = that.offsetTop + that.offsetBottom + that.$jconfirmBox.outerHeight() - that.$contentPane.outerHeight() + that.$content.outerHeight();
                     if(total < wh){
                         that.$contentPane.addClass('no-scroll');
                     }else{
@@ -750,8 +754,9 @@
             if(this.closeIcon){
                 if(this.closeIconClass){
                     // user requires a custom class.
-                    var closeHtml = '<i class="' + this.closeIconClass + '"></i>';
+                    var closeHtml = '<i id="closeIconClass"></i>';
                     this.$closeIcon.html(closeHtml);
+                    this.$closeIcon.find('#closeIconClass').addClass(this.closeIconClass);
                 }
 
                 this.$closeIcon.click(function(e){
@@ -831,7 +836,8 @@
             if(this.isAjaxLoading && !force)
                 return;
 
-            this.$icon.html(this.icon ? '<i class="' + this.icon + '"></i>' : '');
+            this.$icon.html(this.icon ? '<i id="setIcon"></i>' : '');
+            this.$icon.find('#setIcon').addClass(this.icon || '');
             this.updateTitleContainer();
         },
         updateTitleContainer: function(){

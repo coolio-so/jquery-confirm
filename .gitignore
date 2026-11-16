@@ -2,3 +2,6 @@
 /nbproject
 /.idea
 themelayout.psd
+
+.vscode
+node_modules

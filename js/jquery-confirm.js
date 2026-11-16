@@ -595,7 +595,7 @@
             var that = this;
             this.boxClicked = false;
 
-            this.$scrollPane.click(function(e){ // Ignore propagated clicks
+            this.$scrollPane.on('click', function(e){ // Ignore propagated clicks
                 if(!that.boxClicked){ // Background clicked
                     /*
                      If backgroundDismiss is a function and its return value is truthy
@@ -632,7 +632,7 @@
                 that.boxClicked = false;
             });
 
-            this.$jconfirmBox.click(function(e){
+            this.$jconfirmBox.on('click', function(e){
                 that.boxClicked = true;
             });
 
@@ -700,7 +700,7 @@
                     .addClass(that.buttons[key].btnClass)
                     .prop('disabled', that.buttons[key].isDisabled)
                     .css('display', that.buttons[key].isHidden ? 'none' : '')
-                    .click(function(e){
+                    .on('click', function(e){
                         e.preventDefault();
                         var res = that.buttons[key].action.apply(that, [that.buttons[key]]);
                         that.onAction.apply(that, [key, that.buttons[key]]);
@@ -759,7 +759,7 @@
                     this.$closeIcon.find('#closeIconClass').addClass(this.closeIconClass);
                 }
 
-                this.$closeIcon.click(function(e){
+                this.$closeIcon.on('click', function(e){
                     e.preventDefault();
 
                     var buttonName = false;
@@ -870,7 +870,7 @@
             this.$content.html('');
             this.$content.append(this.contentParsed);
             setTimeout(function(){
-                that.$body.find('input[autofocus]:visible:first').focus();
+                that.$body.find('input[autofocus]:visible:first').trigger('focus');
             }, 100);
         },
         loadingSpinner: false,
@@ -1122,14 +1122,14 @@
                                         scrollTop: scrollTo
                                     }, that.animationSpeed, 'swing', function(){
                                         // gracefully scroll and then focus.
-                                        $lf.focus();
+                                        $lf.trigger('focus');
                                     });
                                 }else{
                                     // the element to be focused is already in view.
-                                    $lf.focus();
+                                    $lf.trigger('focus');
                                 }
                             }else{
-                                $lf.focus();
+                                $lf.trigger('focus');
                             }
                             w.jconfirm.lastFocused = false;
                         }

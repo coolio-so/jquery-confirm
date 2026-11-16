@@ -1207,7 +1207,7 @@
 
             this.$body.removeClass(this.animationParsed);
             this.$jconfirmBg.removeClass('jconfirm-bg-h');
-            this.$body.focus();
+            this.$body.trigger('focus');
 
             that.$jconfirmBoxContainer.css('transform', 'translate(' + 0 + 'px, ' + 0 + 'px)');
 
